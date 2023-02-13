@@ -1,0 +1,76 @@
+Try to run this program
+
+import emoji 
+print(emoji.emojize("Python is not :ambulance: "))
+
+
+We can install it with pip but:
+- Globally but don't want to pollute the global package space. What if projects need conflicting versions?
+- Locally installed packages won't carry over to deployed servers. 
+
+===============================
+virtualenv
+===============================
+
+Install virtualenv
+$ virtualenv foldername
+OR
+~/foldername $ virtualenv .
+
+cd to bin and run:
+$ source ./bin/activate
+
+To deactivate 
+$ deactivate
+
+
+You don't want to push the bin folder. Solution:
+$ pip freeze > requirements.txt 
+
+$ pip install -r requirements.txt
+
+Problem: You must remember to freeze the requirements every time before you deploy. 
+
+===============================
+pipenv
+===============================
+
+In folder
+$ pipenv install
+
+$ pipenv install emoji
+
+$ pipenv shell
+
+
+Problem: Has its own non-standard Pipfile. Wouldn't it be nice to have a project file that follows the Python standard (PEP 518) and allows for creating and deploying Python packages?
+
+https://peps.python.org/pep-0518/
+
+
+===============================
+poetry
+===============================
+
+Install with or without pip (as described in the documentation).
+
+$ poetry init
+
+$ poetry install
+
+$ poetry shell
+
+
+To install additional libraries:
+$ poetry add
+
+To initialize a project with a structure that includes tests etc.
+$ poetry new <project_name>
+
+
+
+
+Bonus Info:
+For MacOS and Linux the virtual environments can be found here: .local/share/virtualenvs
+For Windows it's probably somewhere around: %USERPROFILE%\AppData\Local\....?
+This is useful cause virtual environments cannot be named the same and can be deleted here. 
