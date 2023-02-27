@@ -14,8 +14,6 @@ const users = [{
  *     responses:
  *       200:
  *         description: Returns all users
- *         content: 
- *          application/json:
  */
 router.get("/api/users", (req, res) => {
     res.send({ data: users });
@@ -29,8 +27,6 @@ router.get("/api/users", (req, res) => {
  *     responses:
  *       200:
  *         description: Returns the users that was created
- *         content: 
- *          application/json:
  */
 router.post("/api/users", (req, res) => {
     const user = req.body;
