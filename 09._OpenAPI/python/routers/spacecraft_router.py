@@ -1,4 +1,3 @@
-from typing import Union
 from fastapi import APIRouter, Query
 from pydantic import BaseModel
 
@@ -17,9 +16,13 @@ spacecrafts = [
     {"id": 5, "name": "Dragon"}
 ]
 
+@router.get("/api/spacecrafts", tags=["Spacecrafts"], response_model=list[Spacecraft])
+def get_spacecrafts():
+    return spacecrafts
 
-@router.get("/spacecrafts/{spacecraft_id}")
-def get_spacecraft(spacecraft_id: int, show_id: Union[str, None] = Query("Default", min_length=2, max_length=50)):
+
+@router.get("/api/spacecrafts/{spacecraft_id}", tags=["Spacecrafts"], response_model=Spacecraft)
+def get_spacecraft(spacecraft_id: int, show_id: str | None = Query("Default", min_length=2, max_length=50)):
     for spacecraft in spacecrafts:
         if spacecraft["id"] == spacecraft_id:
             if show_id != "Default":
@@ -27,7 +30,7 @@ def get_spacecraft(spacecraft_id: int, show_id: Union[str, None] = Query("Defaul
             return spacecraft
 
  
-@router.post("/spacecrafts")
+@router.post("/api/spacecrafts", tags=["Spacecrafts"], response_model=Spacecraft)
 def add_spacecraft(spacecraft: Spacecraft):
     print(spacecraft)
     spacecrafts.append(spacecraft)
